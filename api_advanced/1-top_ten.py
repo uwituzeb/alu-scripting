@@ -3,6 +3,7 @@
 import requests
 import sys
 
+
 def top_ten(subreddit):
     """Returns: top ten post titles
        or None if queried subreddit is invalid
@@ -10,15 +11,15 @@ def top_ten(subreddit):
     Args:
         subreddit title
     """
-headers = {'User-Agent': 'test' }
+headers = {'User-Agent': 'test'}
 url = "https://www.reddit.com/r/{subreddit}/hot.json"
 parameters = {'limit': 10}
-response = requests.get(url, headers=headers, allow_redirects=False, params=parameters)
+response = requests.get(url, headers=headers, 
+                        allow_redirects=False, params=parameters)
 
 if response.status_code == 200:
     titles_ = response.json().get('data').get('children')
     for title_ in titles_:
         print(title_.get('data').get('title'))
-    else:
-        print(None)
-        
+else:
+    print(None)

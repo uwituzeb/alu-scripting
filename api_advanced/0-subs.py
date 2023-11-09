@@ -1,14 +1,15 @@
 #!/usr/bin/python3
-"""Module to get the number of subscribers for a subreddit"""
+""" Module to get the number of subscribers for a subreddit """
 import requests
 from sys import argv
 
+
 def number_of_subscribers(subreddit):
-    """Returns:
-            number of subscribers,
-            0 if subreddit is invalid
-        Args:
-            subreddit: subreddit name
+    """Returns: number of subscribers,
+        or 0 if subreddit is invalid
+        
+    Args:
+        subreddit: subreddit name
     """
     
     headers = {'User-Agent': 'test'}
