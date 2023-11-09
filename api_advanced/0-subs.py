@@ -1,5 +1,7 @@
 #!/usr/bin/python3
-""" Module to get the number of subscribers for a subreddit """
+""" 
+get number of subcribers on subreddit 
+"""
 import requests
 from sys import argv
 
