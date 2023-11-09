@@ -1,18 +1,15 @@
 #!/usr/bin/python3
-""" 
-get number of subcribers on subreddit 
-"""
+""" get number of subcribers on subreddit """
 import requests
-from sys import argv
+import sys
 
 
 def number_of_subscribers(subreddit):
-    """Returns: number of subscribers,
-        or 0 if subreddit is invalid
-        
-    Args:
+    """  Args:
         subreddit: subreddit name
-    """
+    Returns:
+        number of subscribers to the subreddit,
+        or 0 if subreddit requested is invalid"""
     
     headers = {'User-Agent': 'test'}
     url = f"https://www.reddit.com/r/{subreddit}/about.json"
