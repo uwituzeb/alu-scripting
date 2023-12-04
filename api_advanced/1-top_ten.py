@@ -1,25 +1,33 @@
 #!/usr/bin/python3
-""" module for function to return top 10 hot posts of a given subreddit """
+"""
+Module
+"""
+
+import json
 import requests
 import sys
 
 
 def top_ten(subreddit):
-    """Returns: top ten post titles
-       or None if queried subreddit is invalid
+    url = "https://www.reddit.com/r/{}/hot.json?limit=10".format(subreddit)
+    headers = {'User-agent': 'myRedditScript/1.0'}
+    response = requests.get(url, headers=headers, allow_redirects=False)
 
-    Args:
-        subreddit title
-    """
-headers = {'User-Agent': 'test'}
-url = "https://www.reddit.com/r/{subreddit}/hot.json"
-parameters = {'limit': 10}
-response = requests.get(url, headers=headers, 
-                        allow_redirects=False, params=parameters)
+    if response.status_code == 200:
+        data = response.json()
+        if 'data' in data and 'children' in data['data']:
+            top_posts = [post['data']['title']
+                         for post in data['data']['children']]
+            for post_title in top_posts:
+                print(post_title)
+        else:
+            print("No posts found")
+    else:
+        print("None")
 
-if response.status_code == 200:
-    titles_ = response.json().get('data').get('children')
-    for title_ in titles_:
-        print(title_.get('data').get('title'))
-else:
-    print(None)
+
+if __name__ == '__main__':
+    if len(sys.argv) < 2:
+        print("Please pass an argument for the subreddit to search.")
+    else:
+        top_ten(sys.argv[1])
